@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Subs.Views.AddSubscriptionPage">
+    <Shell.TitleView>
+        <Grid HorizontalOptions="Center" VerticalOptions="Center" Padding="20, 0">
+            <Label Text="Add Subscription" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+        </Grid>
+    </Shell.TitleView>
+    
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout>
+                <Label Text="Subscription Name"/>
+                <Entry Placeholder="eg., Streaming Service"/>
+
+                <Label Text="Amount" Margin="0,20,0,0"/>
+                <Entry Placeholder="$0.00"/>
+
+                <Label Text="Bill Frequency" Margin="0,20,0,0"/>
+                <Picker/>
+
+                <Grid ColumnDefinitions="*, Auto" Margin="0,10,0,0">
+                    <Label Grid.Column="0" Text="Start Date" HorizontalOptions="Fill" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                    <DatePicker Grid.Column="1" HorizontalOptions="End"/>
+                </Grid>
+                
+                <Grid ColumnDefinitions="*, 40" Margin="0,10,0,0">
+                    <Label Grid.Column="0" Text="Reminder" HorizontalOptions="Fill" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                    <Switch Grid.Column="1"/>
+                </Grid>
+
+                <Label Text="Days Before Reminder" Margin="0,20,0,0"/>
+                <Entry Placeholder="0"/>
+
+                <Label Text="Notes" Margin="0,20,0,0"/>
+                <Editor Placeholder="Additional details" HeightRequest="200"/>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="1" Text="Save"/>
+    </Grid>
+</ContentPage>

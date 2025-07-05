@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Subs.Views.SubscriptionDetailsPage"
+             xmlns:local="clr-namespace:Fonts">
+    <Shell.TitleView>
+        <Grid HorizontalOptions="Center" VerticalOptions="Center" Padding="20,0">
+            <Label Text="Subscription Details" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+        </Grid>
+    </Shell.TitleView>
+    
+    <Grid RowDefinitions="*,Auto" ColumnDefinitions="*,*" ColumnSpacing="10">
+        <ScrollView Grid.Row="0" Grid.ColumnSpan="2">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <!-- Logo -->
+                <Border Stroke="LightGray" HorizontalOptions="Center" StrokeShape="RoundRectangle  20">
+                    <Image Source="{Binding Subscription.LogoUrl}"
+                       WidthRequest="120"
+                       HeightRequest="120"
+                       Aspect="AspectFit"/>
+                </Border>
+
+                <Label Text="Subscription" FontSize="Medium" FontAttributes="Bold"/>
+
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="20">
+                    <Border Grid.Column="0" Grid.RowSpan="2" BackgroundColor="LightGray" StrokeShape="RoundRectangle 5" 
+                        HeightRequest="60" WidthRequest="60" Padding="20,10">
+                        <Label Text="{x:Static local:FluentUI.music_note_1_24_regular}" FontFamily="FluentUI" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Border>
+
+                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Subscription.Name}" FontSize="Small" FontAttributes="Bold" HorizontalOptions="Start" VerticalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Subscription.Description}" FontSize="Micro" TextColor="Gray" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"/>
+                </Grid>
+
+
+                <Label Text="Payment" FontSize="Medium" FontAttributes="Bold"/>
+
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="20">
+                    <Border Grid.Column="0" Grid.RowSpan="2" BackgroundColor="LightGray" StrokeShape="RoundRectangle 5" 
+                        HeightRequest="60" WidthRequest="60" Padding="10">
+                        <Label Text="{x:Static local:FluentUI.payment_20_regular}" FontFamily="FluentUI" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Border>
+
+                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Subscription.Price, StringFormat='{0:C}'}" FontSize="Small" FontAttributes="Bold" HorizontalOptions="Start" VerticalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Subscription.Interval}" FontSize="Micro" TextColor="Gray" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"/>
+                </Grid>
+
+                <Label Text="Renewal" FontSize="Medium" FontAttributes="Bold"/>
+
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="20">
+                    <Border Grid.Column="0" Grid.RowSpan="2" BackgroundColor="LightGray" StrokeShape="RoundRectangle 5" 
+                        HeightRequest="60" WidthRequest="60" Padding="10">
+                        <Label Text="{x:Static local:FluentUI.calendar_32_regular}" FontFamily="FluentUI" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Border>
+
+                    <Label Grid.Column="1" Grid.Row="0" Text="Next Payment" FontSize="Small" FontAttributes="Bold" HorizontalOptions="Start" VerticalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Subscription.NextRenewalDate, StringFormat='Next Renewal: {0:MMMM dd, yyyy}'}" FontSize="Micro" TextColor="Gray" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"/>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="1" Grid.Column="0" Text="Delete" Command="{Binding DeleteCommand}" Background="{DynamicResource Secondary}" TextColor="{DynamicResource SecondaryDarkText}"/>
+        <Button Grid.Row="1" Grid.Column="1" Text="Edit" Command="{Binding EditCommand}" />
+    </Grid>
+</ContentPage>
