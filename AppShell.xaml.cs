@@ -1,4 +1,5 @@
-﻿using Subs.Views;
+﻿using Subs.Data;
+using Subs.Views;
 
 namespace Subs
 {
@@ -7,7 +8,7 @@ namespace Subs
         public AppShell()
         {
             InitializeComponent();
-
+            DBService.Initialize();
             // Register routes for navigation
             Routing.RegisterRoute(nameof(AddSubscriptionPage), typeof(AddSubscriptionPage));
             Routing.RegisterRoute(nameof(SubscriptionDetailsPage), typeof(SubscriptionDetailsPage));

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Fonts"
+             xmlns:models="clr-namespace:Subs.Models"
              x:Class="Subs.Views.SubscriptionsPage">
     <Shell.TitleView>
         <Grid HorizontalOptions="Center" VerticalOptions="Center" Padding="20, 0">
@@ -16,24 +17,49 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <Grid>
-        <CollectionView x:Name="_subscriptions"
-            ItemsSource="{Binding Subscriptions}"
-            SelectionMode="Single"
-            SelectionChangedCommand="{Binding SubscriptionDetailsCommand}"
-            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference _subscriptions}}">
+        <CollectionView ItemsSource="{Binding Subscriptions}"
+                        x:Name="_subscriptions"
+                        SelectionMode="Single"
+                        Margin="8"
+                        SelectionChangedCommand="{Binding SubscriptionDetailsCommand}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference _subscriptions}}">
+            <CollectionView.EmptyView>
+                <Grid Padding="20">
+                    <Label Text="You currently don't have any subscriptions to track" HorizontalTextAlignment="Center"/>
+                </Grid>
+            </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid ColumnDefinitions="2*,*" RowDefinitions="Auto,Auto,Auto">
-                        <Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" />
-                        <Label Grid.Column="0" Grid.Row="1" Text="{Binding Description}" />
-                        <Label Grid.Column="0" Grid.Row="2" Text="{Binding NextRenewalDate, StringFormat='Next Renewal: {0:MMMM dd, yyyy}'}" />
-
-                        <Image Grid.Column="1" Grid.RowSpan="3" Source="{Binding LogoUrl}" Aspect="AspectFit" VerticalOptions="Center"/>
+                <DataTemplate x:DataType="models:Subscription">
+                    <Grid ColumnDefinitions="1.5*,*">
+                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                            <Label Text="{Binding SubscriptionApp.Name}"
+                                    FontAttributes="Bold"
+                                    FontSize="18" />
+                            <Label Text="{Binding RenewalDate, StringFormat='Next: {0:MMM d, yyyy}'}"
+                                    FontSize="14"
+                                    TextColor="Gray" />
+                            <Label Text="{Binding Price, StringFormat='€{0:F2}'}"
+                                    FontSize="14" />
+                        </VerticalStackLayout>
+                        <!--<Image  Grid.Column="1" 
+                                HeightRequest="60"
+                                HorizontalOptions="End"
+                                Aspect="AspectFit" >
+                            <Image.Source>
+                                <UriImageSource CachingEnabled="True" CacheValidity="20:00:00" Uri="{Binding SubscriptionApp.IconUrl, Mode=TwoWay}"/>
+                            </Image.Source>
+                        </Image>-->
+                        <Image  Grid.Column="1" 
+                            HeightRequest="60"
+                            HorizontalOptions="End"
+                            Aspect="AspectFit" 
+                            Source="{Binding SubscriptionApp.IconUrl}"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button Text="+" VerticalOptions="End" HorizontalOptions="End" FontSize="Large" Margin="20" Padding="30,20"
+        </CollectionView>        
+        
+        <Button Text="+" VerticalOptions="End" HorizontalOptions="End" FontSize="Large" Margin="10" Padding="25,15"
                 Command="{Binding AddNewSubscriptionCommand}"/>
     </Grid>
 </ContentPage>

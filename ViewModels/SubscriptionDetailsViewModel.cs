@@ -8,6 +8,6 @@ namespace Subs.ViewModels
     public partial class SubscriptionDetailsViewModel : BaseViewModel
     {
         [ObservableProperty]
-        SubscriptionModel _subscription;
+        Subscription _subscription = default!;
     }
 }

@@ -22,5 +22,20 @@ namespace Subs.ViewModels.Base
             else
                 await Shell.Current.GoToAsync($"{route}", animate);
         }
+
+        public async Task NavigateBackAsync(bool animate = true)
+        {
+            if (Shell.Current == null)
+                throw new InvalidOperationException("Shell is not initialized.");
+            if (Shell.Current.Navigation.NavigationStack.Count > 1)
+            {
+                await Shell.Current.GoToAsync("..", animate);
+            }
+            else
+            {
+                // If no previous page, just pop the modal
+                await Shell.Current.Navigation.PopModalAsync(animate);
+            }
+        }
     }
 }

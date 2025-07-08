@@ -9,4 +9,13 @@ public partial class AddSubscriptionPage : ContentPage
 		InitializeComponent();
         BindingContext = vm;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is AddSubscriptionViewModel vm)
+        {
+            await vm.InitializeCommand.ExecuteAsync(null);
+        }
+    }
 }

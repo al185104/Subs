@@ -7,8 +7,76 @@
             <Label Text="Add Subscription" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
         </Grid>
     </Shell.TitleView>
-    
-    <Grid RowDefinitions="*,Auto">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="24">
+            <!-- App Picker -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Select Service" FontAttributes="Bold" />
+                <Picker ItemsSource="{Binding SubscriptionApps}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedApp}"/>
+            </VerticalStackLayout>
+
+            <!-- Price -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Price (€)" FontAttributes="Bold" />
+                <Entry Text="{Binding Price, Mode=TwoWay}" 
+                       Keyboard="Numeric"
+                       Placeholder="0.00" />
+            </VerticalStackLayout>
+
+            <!--Billing Frequency-->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Billing Frequency" FontAttributes="Bold" />
+                <Picker ItemsSource="{Binding BillingCycles}" 
+                        SelectedItem="{Binding SelectedBillingCycle}"
+                        ItemDisplayBinding="{Binding .}" />
+            </VerticalStackLayout>
+
+            <!-- Start Date -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Start Date" FontAttributes="Bold" />
+                <DatePicker Date="{Binding StartDate, Mode=TwoWay}" />
+            </VerticalStackLayout>
+
+            <!-- Renewal Date -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Renewal Date" FontAttributes="Bold" />
+                <DatePicker Date="{Binding RenewalDate, Mode=TwoWay}" IsEnabled="False"/>
+            </VerticalStackLayout>
+
+            <!--Reminder switch-->
+            <Grid ColumnDefinitions="*, 40" Padding="0">
+                <Label Grid.Column="0" Text="Reminder" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                <Switch Grid.Column="1" IsToggled="{Binding IsReminderEnabled}" HorizontalOptions="End"/>
+            </Grid>
+
+            <!-- Days before reminder -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Days Before Reminder" FontAttributes="Bold" />
+                <Entry Text="{Binding DaysBeforeReminder, Mode=OneWay}" Keyboard="Numeric" Placeholder="3"/>
+            </VerticalStackLayout>
+
+            <!-- Notes -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Notes" FontAttributes="Bold" />
+                <Editor Text="{Binding Notes, Mode=TwoWay}"
+                        AutoSize="TextChanges"
+                        HeightRequest="100"
+                        Placeholder="Optional notes" />
+            </VerticalStackLayout>
+
+            <!-- Save Button -->
+            <Button Text="Save Subscription"
+                    Command="{Binding SaveCommand}"
+                    CornerRadius="8"
+                    HeightRequest="48"
+                    VerticalOptions="End" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+    <!--<Grid RowDefinitions="*,Auto">
         <ScrollView Grid.Row="0">
             <VerticalStackLayout>
                 <Label Text="Subscription Name"/>
@@ -40,5 +108,5 @@
         </ScrollView>
 
         <Button Grid.Row="1" Text="Save"/>
-    </Grid>
+    </Grid>-->
 </ContentPage>

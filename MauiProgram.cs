@@ -1,5 +1,10 @@
 ﻿using CommunityToolkit.Maui;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection.Extensions; // Add this namespace
+using System.Net.Http; // Ensure this namespace is included
+using Subs.Data;
+using Plugin.LocalNotification;
 
 namespace Subs
 {
@@ -11,6 +16,7 @@ namespace Subs
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseLocalNotification()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("FluentSystemIcons-Regular.ttf", "FluentUI");
@@ -21,6 +27,9 @@ namespace Subs
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            // Register HttpClient (for future sync)
+            builder.Services.AddHttpClient();
 
             builder.Services.AddSingleton<Subs.ViewModels.SubscriptionViewModel>();
             builder.Services.AddTransient<Subs.ViewModels.UpcomingRenewalViewModel>();

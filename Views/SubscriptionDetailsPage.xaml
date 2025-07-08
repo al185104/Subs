@@ -11,51 +11,48 @@
     
     <Grid RowDefinitions="*,Auto" ColumnDefinitions="*,*" ColumnSpacing="10">
         <ScrollView Grid.Row="0" Grid.ColumnSpan="2">
-            <VerticalStackLayout Padding="20" Spacing="20">
+            <VerticalStackLayout Padding="0,20" Spacing="10">
 
                 <!-- Logo -->
-                <Border Stroke="LightGray" HorizontalOptions="Center" StrokeShape="RoundRectangle  20">
-                    <Image Source="{Binding Subscription.LogoUrl}"
+                <Border Stroke="LightGray" HorizontalOptions="Center" StrokeShape="RoundRectangle  20" Padding="20">
+                    <Image Source="{Binding Subscription.SubscriptionApp.IconUrl}"
                        WidthRequest="120"
                        HeightRequest="120"
                        Aspect="AspectFit"/>
                 </Border>
 
-                <Label Text="Subscription" FontSize="Medium" FontAttributes="Bold"/>
-
-                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="20">
-                    <Border Grid.Column="0" Grid.RowSpan="2" BackgroundColor="LightGray" StrokeShape="RoundRectangle 5" 
-                        HeightRequest="60" WidthRequest="60" Padding="20,10">
-                        <Label Text="{x:Static local:FluentUI.music_note_1_24_regular}" FontFamily="FluentUI" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="20">
+                    <Label Grid.ColumnSpan="2" Text="Subscription" FontSize="Small" FontAttributes="Bold"/>
+                    <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" BackgroundColor="LightGray" StrokeShape="RoundRectangle 5" 
+                        HeightRequest="60" WidthRequest="60">
+                        <Label Text="{Binding Subscription.SubscriptionApp.Category}" FontFamily="FluentUI" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </Border>
 
-                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Subscription.Name}" FontSize="Small" FontAttributes="Bold" HorizontalOptions="Start" VerticalTextAlignment="End" />
-                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Subscription.Description}" FontSize="Micro" TextColor="Gray" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"/>
+                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Subscription.SubscriptionApp.Name}" FontSize="Small" FontAttributes="Bold" HorizontalOptions="Start" VerticalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding Subscription.SubscriptionApp.Description}" FontSize="Micro" TextColor="Gray" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"/>
                 </Grid>
 
-
-                <Label Text="Payment" FontSize="Medium" FontAttributes="Bold"/>
-
-                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="20">
-                    <Border Grid.Column="0" Grid.RowSpan="2" BackgroundColor="LightGray" StrokeShape="RoundRectangle 5" 
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="20">
+                    <Label Grid.ColumnSpan="2" Text="Payment" FontSize="Small" FontAttributes="Bold"/>
+                    <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" BackgroundColor="LightGray" StrokeShape="RoundRectangle 5" 
                         HeightRequest="60" WidthRequest="60" Padding="10">
                         <Label Text="{x:Static local:FluentUI.payment_20_regular}" FontFamily="FluentUI" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </Border>
 
-                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Subscription.Price, StringFormat='{0:C}'}" FontSize="Small" FontAttributes="Bold" HorizontalOptions="Start" VerticalTextAlignment="End" />
-                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Subscription.Interval}" FontSize="Micro" TextColor="Gray" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"/>
+                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Subscription.Price, StringFormat='{0:C}'}" FontSize="Small" FontAttributes="Bold" HorizontalOptions="Start" VerticalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding Subscription.BillingCycle}" FontSize="Micro" TextColor="Gray" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"/>
                 </Grid>
 
-                <Label Text="Renewal" FontSize="Medium" FontAttributes="Bold"/>
 
-                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="20">
-                    <Border Grid.Column="0" Grid.RowSpan="2" BackgroundColor="LightGray" StrokeShape="RoundRectangle 5" 
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="20">
+                    <Label Grid.ColumnSpan="2" Text="Renewal" FontSize="Small" FontAttributes="Bold"/>
+                    <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" BackgroundColor="LightGray" StrokeShape="RoundRectangle 5" 
                         HeightRequest="60" WidthRequest="60" Padding="10">
                         <Label Text="{x:Static local:FluentUI.calendar_32_regular}" FontFamily="FluentUI" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </Border>
 
-                    <Label Grid.Column="1" Grid.Row="0" Text="Next Payment" FontSize="Small" FontAttributes="Bold" HorizontalOptions="Start" VerticalTextAlignment="End" />
-                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Subscription.NextRenewalDate, StringFormat='Next Renewal: {0:MMMM dd, yyyy}'}" FontSize="Micro" TextColor="Gray" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"/>
+                    <Label Grid.Column="1" Grid.Row="1" Text="Next Payment" FontSize="Small" FontAttributes="Bold" HorizontalOptions="Start" VerticalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding Subscription.RenewalDate, StringFormat='{0:MMMM dd, yyyy}'}" FontSize="Micro" TextColor="Gray" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"/>
                 </Grid>
 
             </VerticalStackLayout>
